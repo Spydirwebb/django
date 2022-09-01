@@ -1,0 +1,26 @@
+<h1>{{ character }}</h1>
+
+<ul>
+    <li>Name: {{ character.name }}</li>
+    <li>Level: {{ character.level }}</li>
+    <li>Exp: {{ character.currentExp }} / {{ character.nextLevelExp }}</li>
+    <li>Health: {{ character.currentHealth }} / {{ character.maxHealth }}</li>
+    <li>Mana: {{ character.currentMana }} / {{ character.maxMana }}</li>
+    <li>Attack: {{ character.attack }}</li>
+    <li>Defense: {{ character.defense }}</li>
+    <li>Armor: {% if character.armor_set.all %}
+                    {{ character.armor_set.all }}
+                {% else %}
+                    None
+                {% endif %}</li>
+    <li>Weapon: {% if character.weapon_set.all %}
+                    {{ character.armor_set.all }}
+                {% else %}
+                    None
+                {% endif %}</li>
+    <li>Skill: {% if character.skill_set.all %}
+                    {{ character.skill_set.all }}
+                {% else %}
+                    None
+                {% endif %}</li>
+</ul>
