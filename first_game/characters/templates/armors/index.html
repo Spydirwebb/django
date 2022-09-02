@@ -1,0 +1,9 @@
+{% if armor_list %}
+    <ul>
+    {% for armor in armor_list %}
+        <li>{{ armor.name }} - ID.{{ armor.id }} - {{armor.belongs_to}}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No armors are available.</p>
+{% endif %}

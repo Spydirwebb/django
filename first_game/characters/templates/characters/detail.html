@@ -8,18 +8,30 @@
     <li>Mana: {{ character.currentMana }} / {{ character.maxMana }}</li>
     <li>Attack: {{ character.attack }}</li>
     <li>Defense: {{ character.defense }}</li>
-    <li>Armor: {% if character.armor_set.all %}
-                    {{ character.armor_set.all }}
+    <li>Armor: {% if armor %}
+                    {{ armor.name }}
+                    <ul>
+                        <li>Attack: {{armor.attack}}</li>
+                        <li>Defense: {{armor.defense}}</li>
+                    </ul>
                 {% else %}
                     None
                 {% endif %}</li>
-    <li>Weapon: {% if character.weapon_set.all %}
-                    {{ character.armor_set.all }}
+    <li>Weapon: {% if weapon %}
+                    {{ weapon.name }}
+                    <ul>
+                        <li>Attack: {{weapon.attack}}</li>
+                        <li>Defense: {{weapon.defense}}</li>
+                    </ul>
                 {% else %}
                     None
                 {% endif %}</li>
-    <li>Skill: {% if character.skill_set.all %}
-                    {{ character.skill_set.all }}
+    <li>Skill: {% if skill %}
+                    {{ skill.name }}
+                    <ul>
+                        <li>Attack: {{skill.attack}}</li>
+                        <li>Defense: {{skill.defense}}</li>
+                    </ul>
                 {% else %}
                     None
                 {% endif %}</li>
