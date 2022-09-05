@@ -1,4 +1,6 @@
 from django.shortcuts import render, get_object_or_404
+from django.http import HttpResponse, HttpResponseRedirect
+from django.urls import reverse
 
 from .models import Character, Armor, Weapon, Skill
 
@@ -43,3 +45,10 @@ def armor(request, character_id):
 def armor_details(request, character_id, armor_id):
     armor = get_object_or_404(Armor, pk=armor_id, fk=character_id)
     return render(request, 'armors/detail.html', {'armor': armor})
+
+def fight(request, character_id):
+    character = get_object_or_404(Character, pk=character_id)
+    character.currentExp += 5
+    character.save()
+    return HttpResponseRedirect(reverse('characters:details', args=(character.id,)))
+
