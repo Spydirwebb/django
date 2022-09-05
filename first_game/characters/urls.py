@@ -6,7 +6,7 @@ app_name= 'characters'
 urlpatterns = [
     ###GET
     #ex: /character/
-    path('', views.index, name='index'),
+    path('', views.IndexView.as_view(), name='index'),
     #ex: /character/1
     path('<int:character_id>/', views.details, name='details'),
     #ex: /character/1/armor

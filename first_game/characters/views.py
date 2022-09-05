@@ -1,14 +1,18 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
+from django.views import generic
 
 from .models import Character, Armor, Weapon, Skill
 
 # Create your views here.
-def index(request):
-    character_list = Character.objects.order_by('-name')
-    context = {'character_list': character_list}
-    return render(request, 'characters/index.html', context)
+class IndexView(generic.ListView):
+    template_name = 'characters/index.html'
+    context_object_name = 'character_list'
+
+    def get_queryset(self):
+        '''return list of characters'''
+        return Character.objects.all()
 
 def details (request, character_id):
     #get Character
@@ -29,11 +33,11 @@ def details (request, character_id):
         skill = Skill.objects.get(belongs_to=character_id)
     except Skill.DoesNotExist:
         skill = None
-    #skill = get_object(Skill, belongs_to=character_id)
+
     context = {'character': character,
                 'armor': armor,
                 'weapon': weapon,
-                #'skill': skill
+                'skill': skill
                 }
     return render(request, 'characters/detail.html', context)
 
