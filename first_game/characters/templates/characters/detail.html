@@ -8,12 +8,14 @@
     <li>Mana: {{ character.currentMana }} / {{ character.maxMana }}</li>
     <li>Attack: {{ character.attack }}</li>
     <li>Defense: {{ character.defense }}</li>
-    <li>Armor: {% if armor %}
-                    {{ armor.name }}
-                    <ul>
-                        <li>Attack: {{armor.attack}}</li>
-                        <li>Defense: {{armor.defense}}</li>
-                    </ul>
+    <li>Armor:  {% if character.armor_set %}
+                    {% for armor in character.armor_set.all %}
+                        {{ armor.name }}
+                        <ul>
+                            <li>Attack: {{armor.attack}}</li>
+                            <li>Defense: {{armor.defense}}</li>
+                        </ul>
+                    {% endfor%}
                 {% else %}
                     None
                 {% endif %}</li>
