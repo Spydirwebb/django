@@ -28,7 +28,7 @@ def create_question(question_text, days):
     '''create a question with given 'question_text'
     and published the given number of 'days' offset to now (neg = past, pos = future)
     '''
-    time = timezone.now() - datetime.timedelta(days=days)
+    time = timezone.now() + datetime.timedelta(days=days)
     return Question.objects.create(question_text=question_text, pub_date=time)
 
 class QuestionIndexViewTests(TestCase):
