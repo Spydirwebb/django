@@ -39,17 +39,30 @@ const App = () => {
 
   useEffect (() => {
     refreshList()
-  },[])
-
+    //console.log('Todo list: '+todoList)
+  }, [])
+  
   const refreshList = async() => {
     await axios
-      //.get('https://localhost:8000/api/todos/')
+      //.get('http://localhost:8000/api/todos/')
       .get('https://8000-spydirwebb-django-canuz7re0z4.ws-us65.gitpod.io/api/todos/')
-      .then(res => setTodoList(res.data))
+      .then(res => {
+        console.log(res.data)
+        setTodoList(res.data)
+      })
       .catch(err => console.log(err))
   }
 
   const renderItems = () => {
+    return todoList.map((todo, key) => {
+      return (<li key={todo.id}>
+        {todo.title}
+      </li>)
+    })
+  }
+  /*
+  const renderItems = () => {
+    //the problem is in here i think?
     //const { viewCompleted } = viewCompleted
     const newTodos = todoList.filter(
       todo => todo.completed === viewCompleted
@@ -67,15 +80,15 @@ const App = () => {
       </li>
     })
   }
+  */
   return (
     <main className='content'>
+      <h1>Todo List</h1>
+      <h3>Where is my list?</h3>
       <div className='row'>
         <div className='col-md-6 col-sm-10 mx-auto p-0'>
           <div className='card p-3'>
-            {todoList?
-            <ul className='list-group list-group-flush'>
-              {renderItems()}
-            </ul>
+            {todoList.length>0 ? <ul>{renderItems(todoList)}</ul>
             : <p>Empty List</p>}
           </div>
         </div>
