@@ -45,7 +45,9 @@ const App = () => {
   const refreshList = async() => {
     await axios
       //.get('http://localhost:8000/api/todos/')
-      .get('https://8000-spydirwebb-django-canuz7re0z4.ws-us65.gitpod.io/api/todos/')
+      .get('https://8000-spydirwebb-django-canuz7re0z4.ws-us67.gitpod.io/api/todos/')
+      //.get('http://8000-spydirwebb-django-canuz7re0z4.ws-us65.gitpod.io/api/todos/')
+      //.get('http://127.0.0.1:8000/api/todos/')
       .then(res => {
         console.log(res.data)
         setTodoList(res.data)
