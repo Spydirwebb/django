@@ -25,7 +25,7 @@ const todoItems = [
   },
 ];
 
-const TodoModelBlank= {
+const TodoModel= {
   title: "",
   description: "",
   completed: false 
@@ -33,9 +33,11 @@ const TodoModelBlank= {
 
 const App = () => {
   //const [todos, setTodos] = useState(todoItems)
-  const [activeItem, setActiveItem] = useState(TodoModelBlank)
+  const [activeItem, setActiveItem] = useState(TodoModel)
   const [viewCompleted, setViewCompleted] = useState(false)
   const [todoList, setTodoList] = useState([])
+  const [modal, setModal] = useState(false)
+  const BASE_URL = 'https://8000-spydirwebb-django-canuz7re0z4.ws-us67.gitpod.io/api/'
 
   useEffect (() => {
     refreshList()
@@ -44,8 +46,8 @@ const App = () => {
   
   const refreshList = async() => {
     await axios
-      //.get('http://localhost:8000/api/todos/')
-      .get('https://8000-spydirwebb-django-canuz7re0z4.ws-us67.gitpod.io/api/todos/')
+      //.get('https://8000-spydirwebb-django-canuz7re0z4.ws-us67.gitpod.io/api/todos/')
+      .get(`${BASE_URL}/todos/`)
       /////does the URL change?
       //.get('http://8000-spydirwebb-django-canuz7re0z4.ws-us65.gitpod.io/api/todos/')
       //.get('http://127.0.0.1:8000/api/todos/')
@@ -56,6 +58,28 @@ const App = () => {
       .catch(err => console.log(err))
   }
 
+  toggle = () => {
+    if(modal){
+      setModal(false)
+    } else {
+      setModal(true)
+    }
+  }
+
+  handleSubmit = item => {
+    toggle()
+    if (item.id) {
+      axios
+        .put(`${BASE_URL}/todos/${item.id}`, item)
+      return
+    }
+    axios
+      .post(`${BASE_URL}/todos/`, item)
+  }
+
+  createItem = () => {
+    setActiveItem(TodoModel, setModal(!modal))
+  }
   const renderItems = () => {
     return todoList.map((todo, key) => {
       return (<li key={todo.id}>
