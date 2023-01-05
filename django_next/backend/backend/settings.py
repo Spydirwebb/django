@@ -131,5 +131,8 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CSRF_TRUSTED_ORIGINS = [
-    'https://8000-spydirwebb-django-canuz7re0z4.ws-us81.gitpod.io'
+    'https://8000-spydirwebb-django-canuz7re0z4.ws-us81.gitpod.io',
+    'https://3000-spydirwebb-django-canuz7re0z4.ws-us81.gitpod.io'
 ]
+
+CORS_ALLOW_ALL_ORIGINS = True

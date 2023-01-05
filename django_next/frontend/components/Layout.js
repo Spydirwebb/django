@@ -1,8 +1,9 @@
 import Nav from './Nav'
+import styles from './Layout.module.css'
 
 const Layout = ({children}) => {
     return (
-        <div>
+        <div className={styles.container}>
             <Nav />
             {children}
         </div>

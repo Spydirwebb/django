@@ -1,52 +1,40 @@
+import axios from 'axios'
+
 import { Avatar, Card, CardHeader, styled } from '@mui/material';
 import Grid2 from '@mui/material/Unstable_Grid2'; 
+
+
 import Layout from '../components/Layout'
+import styles from '../styles/Home.module.css'
 
-const Grid2Styled = styled(Grid2)`
-  root:(
-    margin: 25px auto,
-    maxWidth: 95vw,
-  )
-`
-
-export default function Home() {
+export default function Home( {categories} ) {
   return (
     <Layout>
       <Grid2 container spacing={3}>
-          <Grid2Styled item xs={12} md={4}>
-            <Card className='card'>
+        {categories.map(category => (
+          <Grid2 item xs={12} md={4} className={styles.containerCard} key={category.id}>
+            <Card className={styles.card}>
               <CardHeader
                 avatar={
                   <Avatar aria-label='category'>C</Avatar>
                 }
-                title='Category'
-                subheaders='See all'
+                title={`Category ${category.name}`}
+                subheader={`See all ${category.name} businesses`}
               />
             </Card>
-          </Grid2Styled>
-          <Grid2Styled item xs={12} md={4}>
-            <Card className='card'>
-              <CardHeader
-                avatar={
-                  <Avatar aria-label='category'>C</Avatar>
-                }
-                title='Category'
-                subheaders='See all'
-              />
-            </Card>
-          </Grid2Styled>
-          <Grid2Styled item xs={12} md={4}>
-            <Card className='card'>
-              <CardHeader
-                avatar={
-                  <Avatar aria-label='category'>C</Avatar>
-                }
-                title='Category'
-                subheaders='See all'
-              />
-            </Card>
-          </Grid2Styled>
+          </Grid2>
+              ))}
       </Grid2>
     </Layout>
   )
+}
+
+export async function getServerSideProps() {
+  const { data } = await axios.get('https://8000-spydirwebb-django-canuz7re0z4.ws-us81.gitpod.io/categories')
+
+  return {
+    props: {
+      categories: data
+    }
+  }
 }
