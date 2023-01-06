@@ -12,7 +12,7 @@ export default function Home( {categories} ) {
     <Layout>
       <Grid2 container spacing={3}>
         {categories.map(category => (
-          <Grid2 item xs={12} md={4} className={styles.containerCard} key={category.id}>
+          <Grid2 item xs={12} md={4} className={styles.containerCard} key={category.ordinal}>
             <Card className={styles.card}>
               <CardHeader
                 avatar={
