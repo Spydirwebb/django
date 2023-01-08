@@ -30,7 +30,7 @@ export default function Home( {categories} ) {
 }
 
 export async function getServerSideProps() {
-  const { data } = await axios.get('https://8000-spydirwebb-django-canuz7re0z4.ws-us81.gitpod.io/categories')
+  const { data } = await axios.get(`${process.env.DB_BASE_URL}/categories`)
 
   return {
     props: {

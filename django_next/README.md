@@ -5,3 +5,4 @@ learning DRF and nextjs for a CRUD and auth app
 1/4 - 27:41 in video 3. Navbar done
 1/5 - video 3 done. API call working. Still not 100 sure how to work with material ui and next
 1/6 - 17:57 in video 4. slug template created. 'styled' working better in this component
+1/7 - 26:40 in video 4. finally got filter to work correctly on getServerSideProps

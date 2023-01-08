@@ -2,11 +2,9 @@ import Layout from "../../components/Layout"
 
 import { Grid, Box, Card, CardContent, Link, Typography } from "@mui/material"
 import {styled} from '@mui/system'
+import axios from 'axios'
 
-
-
-
-const Category = ({category}) => {
+const Category = ({ category }) => {
     return(
         <CategoryStyled>
             <Layout>
@@ -15,6 +13,7 @@ const Category = ({category}) => {
                     todo filters
                 </Grid>
                 <Grid item xs={12} md={9}>
+                    {category.business.map(business => (
                     <Card className="card">
                         <Box>
                             <CardContent>
@@ -35,12 +34,23 @@ const Category = ({category}) => {
                             </CardContent>
                         </Box>
                     </Card>
+                    ))}
                 </Grid>
             </Grid>
            </Layout>
         </CategoryStyled>
     )
 }
+export async function getServerSideProps({ query: {slug} }) {
+    let { data } = await axios.get(`${process.env.DB_BASE_URL}/categories/?slug=${slug}`)
+
+    //console.log(data)
+    return {
+      props: {
+        category: data[0] || null
+      }
+    }
+  }
 const CategoryStyled = styled('Category')({
     root:{
         margin: '25px',
