@@ -3,8 +3,14 @@ import Layout from "../../components/Layout"
 import { Grid, Box, Card, CardContent, Link, Typography } from "@mui/material"
 import {styled} from '@mui/system'
 import axios from 'axios'
+import { useRouter } from 'next/router'
 
 const Category = ({ category }) => {
+    const router = useRouter()
+    
+    const handleBusinessClick = business => {
+        router.push(`/business/${business.slug}`)
+      }
     return(
         <CategoryStyled>
             <Layout>
@@ -14,21 +20,21 @@ const Category = ({ category }) => {
                 </Grid>
                 <Grid item xs={12} md={9}>
                     {category.business.map(business => (
-                    <Card className="card">
+                    <Card className="card" onClick={() => handleBusinessClick(business)}>
                         <Box>
                             <CardContent>
                                 <Grid container>
                                     <Grid item xs={6}>
-                                        <Typography variant='h5'>Business Name</Typography>
-                                        <Typography variant='subtitle1' className="subtitle">$$</Typography>
-                                        <Link variant='subtitle1' href='https://3000-spydirwebb-django-canuz7re0z4.ws-us81.gitpod.io/'>Business Website</Link>
-                                        <Typography variant='subtitle1'>Business Phone</Typography>
-                                        <Typography variant='subtitle1' className="subtitle">Business Description</Typography>
+                                        <Typography variant='h5'>{business.name}</Typography>
+                                        <Typography variant='subtitle1' className="subtitle">{business.price_range}</Typography>
+                                        <Link variant='subtitle1' href={business.website}>{business.website}</Link>
+                                        <Typography variant='subtitle1'>{business.phone}</Typography>
+                                        <Typography variant='subtitle1' className="subtitle">{business.description}</Typography>
                                     </Grid>
                                     <Grid item xs={6}>
                                         <Typography variant='h5'>Todo Reviews</Typography>
-                                        <Typography variant="subtitle1">Business Hours</Typography>
-                                        <Typography variant="subtitle1">Business Address</Typography>
+                                        <Typography variant="subtitle1">{business.hours}</Typography>
+                                        <Typography variant="subtitle1">{business.street_address} {business.city}, {business.region} {business.postal_code} {business.country}</Typography>
                                     </Grid>
                                 </Grid>
                             </CardContent>

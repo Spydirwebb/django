@@ -28,20 +28,6 @@ const Navigation = () => {
           </AppBar>
         </Box>
       );
-    return(
-        <div>
-            <Appbar position='static'>
-                <Toolbar>
-                    <IconButton edges='start' className='menuButton' color='inherit' aria-label='menu'>
-                        <MenuIcon />
-                    </IconButton>
-                    <Typography variant='h6' className='title'>
-                        Local Reviews
-                    </Typography>
-                </Toolbar>
-            </Appbar>
-        </div>
-    )
 }
 
 
