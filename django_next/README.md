@@ -7,3 +7,4 @@ learning DRF and nextjs for a CRUD and auth app
 1/6 - 17:57 in video 4. slug template created. 'styled' working better in this component
 1/7 - 26:40 in video 4. finally got filter to work correctly on getServerSideProps
 1/8 - finished video 4. business page complete 
+1/11 - 4.45 in video 5. average reviews rendering stars in a loop instead of static

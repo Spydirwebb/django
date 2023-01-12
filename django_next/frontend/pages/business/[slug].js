@@ -3,6 +3,7 @@ import { Button, Card, Grid, List, ListItem, ListItemText, Typography } from "@m
 import Layout from "../../components/Layout"
 
 import axios from 'axios'
+import AverageReview from "../../components/AverageReview"
 
 const BusinessPage = ( {business} ) => {
     return (
@@ -12,7 +13,7 @@ const BusinessPage = ( {business} ) => {
                 <Grid item xs={12} md={6}>
                     <Typography variant='h2'>{business.name}</Typography>
                     <Typography variant='h4'>{business.price_range}</Typography>
-                    <Typography variant='subtitle1'>Todo Review Component</Typography>
+                    <Typography variant='subtitle1'><AverageReview value={1.5} /></Typography>
                     <div className="addReview">
                         <Button variant='contained' color='primary'>Write a review</Button>
                     </div>
