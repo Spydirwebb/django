@@ -13,7 +13,7 @@ const BusinessPage = ( {business} ) => {
                 <Grid item xs={12} md={6}>
                     <Typography variant='h2'>{business.name}</Typography>
                     <Typography variant='h4'>{business.price_range}</Typography>
-                    <Typography variant='subtitle1'><AverageReview value={1.5} /></Typography>
+                    <Typography variant='subtitle1'><AverageReview value={2.5} /></Typography>
                     <div className="addReview">
                         <Button variant='contained' color='primary'>Write a review</Button>
                     </div>
@@ -48,7 +48,7 @@ const BusinessPage = ( {business} ) => {
 export async function getServerSideProps({ query: {slug} }) {
     let { data } = await axios.get(`${process.env.DB_BASE_URL}/businesses/?slug=${slug}`)
 
-    //console.log(data)
+    console.log(data)
     return {
       props: {
         business: data[0] || null

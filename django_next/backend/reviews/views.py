@@ -23,6 +23,8 @@ class ReviewViewSet(viewsets.ModelViewSet):
 class BusinessViewSet(viewsets.ModelViewSet):
 	queryset = Business.objects.all()
 	serializer_class = BusinessSerializer
+	filter_backends = [DjangoFilterBackend]
+	filterset_fields = ['slug']
 	permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
 class CategoryViewSet(viewsets.ModelViewSet):
