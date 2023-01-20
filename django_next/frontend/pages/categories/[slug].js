@@ -1,26 +1,100 @@
 import Layout from "../../components/Layout"
 import AverageReview from '../../components/AverageReview'
 
-import { Grid, Box, Card, CardContent, Link, Typography } from "@mui/material"
+import { Grid, Box, Card, CardContent, Link, Typography, Divider, FormControl, InputLabel, Select, MenuItem, Button } from "@mui/material"
 import {styled} from '@mui/system'
 import axios from 'axios'
 import { useRouter } from 'next/router'
+import { useState } from "react"
 
 const Category = ({ category, reviewAvgs }) => {
+    const [price, setPrice] = useState(null)
+    const [numReviews, setNumReviews] = useState(null)
+    const [rating, setRating] = useState(null)
+
     const router = useRouter()
     
     const handleBusinessClick = business => {
         router.push(`/business/${business.slug}`)
       }
+    
+    const handleClearFilters =() => {
+        setPrice(null)
+        setNumReviews(null)
+        setRating(null)
+    }
     return(
         <CategoryStyled>
             <Layout>
             <Grid container>
                 <Grid item xs={12} md={3}>
-                    todo filters
+                    <Box className="filterContainer">
+                        <Grid container>
+                            <Grid item xs={12}>
+                                <Typography variant='h5'>Filter the Results</Typography>
+                                <Divider />
+                            </Grid>
+                        </Grid>
+                        <Grid container>
+                            <Grid item xs={12}>
+                                <FormControl fullWidth>
+                                    <InputLabel id='price'>Price</InputLabel>
+                                    <Select
+                                        labelId='price'
+                                        id='priceInput'
+                                        label='Price' 
+                                        onChange={e=>setPrice(e.target.value)}
+                                        value={price}
+                                    >
+                                        <MenuItem value={'$'}>Very Cheap</MenuItem>
+                                        <MenuItem value={'$$'}>Cheap</MenuItem>
+                                        <MenuItem value={'$$$'}>Moderate</MenuItem>
+                                        <MenuItem value={'$$$$'}>Expensive</MenuItem>
+                                        <MenuItem value={'$$$$$'}>Very Expensive</MenuItem>
+                                    </Select>
+                                </FormControl>
+                            </Grid>
+                            <Grid item xs={12}>
+                                <FormControl fullWidth>
+                                    <InputLabel id='numReviews'>Number of Reviews</InputLabel>
+                                    <Select
+                                        labelId='numReviews'
+                                        id='numReviewsInput'
+                                        label='Number of Reviews' 
+                                        onChange={e=>setNumReviews(e.target.value)}
+                                        value={numReviews}
+                                    >
+                                        <MenuItem value={5}>5+</MenuItem>
+                                        <MenuItem value={10}>10+</MenuItem>
+                                        <MenuItem value={15}>15+</MenuItem>
+                                    </Select>
+                                </FormControl>
+                            </Grid>
+                            <Grid item xs={12}>
+                                <FormControl fullWidth>
+                                    <InputLabel id='rating'>Average Rating</InputLabel>
+                                    <Select
+                                        labelId='rating'
+                                        id='ratingInput'
+                                        label='Average Rating' 
+                                        onChange={e=>setRating(e.target.value)}
+                                        value={rating}
+                                    >
+                                        <MenuItem value={3}>3+ Stars</MenuItem>
+                                        <MenuItem value={4}>4+ Stars</MenuItem>
+                                        <MenuItem value={5}>5 Stars</MenuItem>
+                                    </Select>
+                                </FormControl>
+                            </Grid>
+                            <Grid item xs={12}>
+                                <Button variant='outlined' color='secondary' className="filterContent-button" onClick={()=>handleClearFilters()}>Clear Filters</Button>
+                            </Grid>
+                        </Grid>
+                    </Box>
                 </Grid>
                 <Grid item xs={12} md={9}>
                     {category.business.map(business => (
+                    (!price || price <= business.price_range) && (!numReviews || numReviews <= business.reviews.length) && (!rating || reviewAvgs[business.url] >= rating) && (
                     <Card className="card" onClick={() => handleBusinessClick(business)} key={business.id}>
                         <Box>
                             <CardContent>
@@ -41,6 +115,7 @@ const Category = ({ category, reviewAvgs }) => {
                             </CardContent>
                         </Box>
                     </Card>
+                    )
                     ))}
                 </Grid>
             </Grid>
@@ -77,6 +152,12 @@ const CategoryStyled = styled('Category')({
     },
     ".card": {
         cursor: 'pointer'
+    },
+    ".filterContainer":{
+        margin: '0 25px'
+    },
+    ".filterContent-button":{
+        marginTop: '15px'
     }
 })
 export default Category

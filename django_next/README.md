@@ -9,4 +9,5 @@ learning DRF and nextjs for a CRUD and auth app
 1/08 - finished video 4. business page complete 
 1/11 - 04:45 in video 5. average reviews rendering stars in a loop instead of static
 1/13 - 26:07 in video 5. calculating average stars for first business in category
-1/19 - finished video 5. category slug should be looping over all businesses. but only 1 business is attached
+1/18 - finished video 5. category slug should be looping over all businesses. but only 1 business is attached
+1/19 - 40:03 in video 6. filters done. working on nav drawer
