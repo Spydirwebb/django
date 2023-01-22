@@ -8,9 +8,9 @@ import { useRouter } from 'next/router'
 import { useState } from "react"
 
 const Category = ({ category, reviewAvgs }) => {
-    const [price, setPrice] = useState(null)
-    const [numReviews, setNumReviews] = useState(null)
-    const [rating, setRating] = useState(null)
+    const [price, setPrice] = useState("")
+    const [numReviews, setNumReviews] = useState("")
+    const [rating, setRating] = useState("")
 
     const router = useRouter()
     
