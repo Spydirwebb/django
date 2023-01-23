@@ -12,3 +12,4 @@ learning DRF and nextjs for a CRUD and auth app
 1/18 - finished video 5. category slug should be looping over all businesses. but only 1 business is attached
 1/19 - 40:03 in video 6. filters done. working on nav drawer
 1/21 - finished video 6. nav drawer opening, but can't set minWidth
+1/22 - 19:21 in video 7. styling add-review page

@@ -1,9 +1,9 @@
 import styled from "@emotion/styled"
 import { Button, Card, Grid, List, ListItem, ListItemText, Typography } from "@mui/material"
-import Layout from "../../components/Layout"
+import Layout from "../../../components/Layout"
 
 import axios from 'axios'
-import AverageReview from "../../components/AverageReview"
+import AverageReview from "../../../components/AverageReview"
 
 const BusinessPage = ( {business} ) => {
     return (
