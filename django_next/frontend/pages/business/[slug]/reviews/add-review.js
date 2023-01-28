@@ -2,9 +2,19 @@ import styled from "@emotion/styled"
 import Layout from "../../../../components/Layout"
 
 import axios from 'axios'
-import { Button, FormControl, InputLabel, MenuItem, Select, TextField, Typography } from "@mui/material"
+import { autocompleteClasses, Button, FormControl, InputLabel, MenuItem, Select, TextField, Typography } from "@mui/material"
+import { useState } from "react"
 
 const AddReviewPage = (  ) => {
+    const [stars, setStars] = useState("")
+    const [title, setTitle] = useState("")
+    const [comment, setComment] = useState("")
+    
+    const submitHandler = () => {
+        console.log(stars)
+        console.log(title)
+        console.log(comment)
+    }
     return (
         <AddReviewPageStyled>
         <Layout>
@@ -12,13 +22,14 @@ const AddReviewPage = (  ) => {
                 {/* TODO */}
                 <Typography variant='h3'>Creating a Review For: Business Name</Typography>
             </div>
-            <div>
-                <FormControl fullWidth>
+            <div className="form">
+                <FormControl fullWidth className="input">
                     <InputLabel id='stars'>Stars Rating Out of 5</InputLabel>
                     <Select
-                        labelId="stars"
                         id='starsComponent'
                         label='Stars'
+                        onChange={e => setStars(e.target.value)}
+                        value={stars}
                     >
                         <MenuItem value={1}>1</MenuItem>
                         <MenuItem value={1.5}>1.5</MenuItem>
@@ -31,24 +42,26 @@ const AddReviewPage = (  ) => {
                         <MenuItem value={5}>5</MenuItem>
                     </Select>
                 </FormControl>
-                <FormControl fullWidth>
+                <FormControl className="input"  fullWidth>
                     <TextField
-                        labelId='title'
                         label='Title'
                         id='titleComponent'
+                        onChange={e => setTitle(e.target.value)}
+                        value={title}
                     />
                 </FormControl>
-                <FormControl>
+                <FormControl className="input" >
                     <TextField
-                    labelId='title'
                     label='Tell us about your experience here'
                     id='commentComponent'
                     multiline
                     minRows={4}
+                    onChange={e => setComment(e.target.value)}
+                    value={comment}
                     />
                 </FormControl>
-                <Button variant='contained' color='primary'>Submit Review</Button>
-            </div>
+            <Button variant='contained' color='primary' onClick={()=>submitHandler()}>Submit Review</Button>
+            </div> 
         </Layout>
         </AddReviewPageStyled>
     )
@@ -57,21 +70,35 @@ const AddReviewPage = (  ) => {
 
 
 const AddReviewPageStyled = styled('AddReviewPage')({
-    ".root":{
+    "root":{
         marginTop: '75px',
         maxWidth: '95vw'
     },
     ".form": {
+        display: 'block',
         marginTop: '35px',
-        
+        width: '50%',
+        margin: 'auto'
     },
     ".description": {
         paddingTop: '15px',
     },
+    ".input":{
+        margin: '15px 0',
+        width: '100%'
+    },
     '@media only screen and (max-width: 768px)':{
-        '.title': {
-            color: 'red'
+        '.form':{
+            width: '95%',
+            padding: '0 10px',
+            margin: '0 auto',
+        },
+        'button':{
+            display: 'block',
+            margin: 'auto',
+            width: '50%'
         }
+
     }
 })
 
