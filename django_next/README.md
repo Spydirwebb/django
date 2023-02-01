@@ -14,3 +14,4 @@ learning DRF and nextjs for a CRUD and auth app
 1/21 - finished video 6. nav drawer opening, but can't set minWidth
 1/22 - 19:21 in video 7. styling add-review page
 1/27 - 28:37 in video 7. still working on add-review page
+1/31 - 28:37 in video 7. add-review page getting error 400 on post

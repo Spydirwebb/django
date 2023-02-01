@@ -31,7 +31,7 @@ export default function Home( {categories} ) {
 }
 
 export async function getServerSideProps() {
-  const { data } = await axios.get(`${process.env.DB_BASE_URL}/categories`)
+  const { data } = await axios.get(`${process.env.NEXT_PUBLIC_DB_BASE_URL}/categories`)
 
   return {
     props: {

@@ -4,8 +4,15 @@ import Layout from "../../../components/Layout"
 
 import axios from 'axios'
 import AverageReview from "../../../components/AverageReview"
+import { useRouter } from "next/router"
 
 const BusinessPage = ( {business} ) => {
+    const router = useRouter()
+    
+    const handleWriteClick = (business) => {
+        router.push(`/business/${business.slug}/reviews/add-review`)
+    }
+    
     return (
         <BusinessPageStyled>
         <Layout>
@@ -15,7 +22,7 @@ const BusinessPage = ( {business} ) => {
                     <Typography variant='h4'>{business.price_range}</Typography>
                     <Typography variant='subtitle1'><AverageReview value={2.5} /></Typography>
                     <div className="addReview">
-                        <Button variant='contained' color='primary'>Write a review</Button>
+                        <Button variant='contained' color='primary' onClick={()=>handleWriteClick(business)}>Write a review</Button>
                     </div>
                     <div className="description">
                         <Typography variant="p">{business.description}</Typography>
@@ -46,7 +53,7 @@ const BusinessPage = ( {business} ) => {
 }
 
 export async function getServerSideProps({ query: {slug} }) {
-    let { data } = await axios.get(`${process.env.DB_BASE_URL}/businesses/?slug=${slug}`)
+    let { data } = await axios.get(`${process.env.NEXT_PUBLIC_DB_BASE_URL}/businesses/?slug=${slug}`)
 
     console.log(data)
     return {

@@ -124,7 +124,7 @@ const Category = ({ category, reviewAvgs }) => {
     )
 }
 export async function getServerSideProps({ query: {slug} }) {
-    let { data } = await axios.get(`${process.env.DB_BASE_URL}/categories/?slug=${slug}`)
+    let { data } = await axios.get(`${process.env.NEXT_PUBLIC_DB_BASE_URL}/categories/?slug=${slug}`)
     //console.log(data[0])
     let reviewAvgs = {}
     let i=0
