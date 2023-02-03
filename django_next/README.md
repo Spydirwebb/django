@@ -16,3 +16,4 @@ learning DRF and nextjs for a CRUD and auth app
 1/27 - 28:37 in video 7. still working on add-review page
 1/31 - 28:37 in video 7. add-review page getting error 400 on post
 2/02 - finished video 7. add-review is posting appropriately
+2/03 - finished video 8. Business page is displaying and filtering reviews
