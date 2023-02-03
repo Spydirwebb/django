@@ -15,3 +15,4 @@ learning DRF and nextjs for a CRUD and auth app
 1/22 - 19:21 in video 7. styling add-review page
 1/27 - 28:37 in video 7. still working on add-review page
 1/31 - 28:37 in video 7. add-review page getting error 400 on post
+2/02 - finished video 7. add-review is posting appropriately

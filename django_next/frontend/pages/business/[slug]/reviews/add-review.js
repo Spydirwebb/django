@@ -5,7 +5,7 @@ import axios from 'axios'
 import { autocompleteClasses, Button, FormControl, InputLabel, MenuItem, Select, TextField, Typography } from "@mui/material"
 import { useState } from "react"
 
-const AddReviewPage = (  ) => {
+const AddReviewPage = ( {business} ) => {
     const [stars, setStars] = useState("")
     const [title, setTitle] = useState("")
     const [comment, setComment] = useState("")
@@ -14,11 +14,13 @@ const AddReviewPage = (  ) => {
         let cookieValue = null;
         if (document.cookie && document.cookie !== '') {
             const cookies = document.cookie.split(';');
+            console.log(cookies)
             for (let i = 0; i < cookies.length; i++) {
                 const cookie = cookies[i].trim();
                 // Does this cookie string begin with the name we want?
                 if (cookie.substring(0, name.length + 1) === (name + '=')) {
                     cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    
                     break;
                 }
             }
@@ -27,36 +29,27 @@ const AddReviewPage = (  ) => {
     }
     
 
-    const submitHandler = () => {
+    const submitHandler = async () => {
         console.log(stars)
         console.log(title)
         console.log(comment)
-        console.log(process.env.NEXT_PUBLIC_DB_BASE_URL)
-        const res = axios.post(`${process.env.NEXT_PUBLIC_DB_BASE_URL}/reviews/`)
-        /*const csrftoken = getCookie('csrftoken');
-    
-        const config = {
-            headers: {
-                'Accept': 'application/json',
-                'Content': 'application/json',
-                'X-CSRFToken': csrftoken
-            }
-        }
+
         const body ={
             title, 
             content: comment,
             stars,
+            business: business.url
         }
 
-        const res= axios.post(`${process.env.NEXT_PUBLIC_DB_BASE_URL}/reviews`, body, config)
-        console.log(res) */
+        const res =  await axios.post(`${process.env.NEXT_PUBLIC_DB_BASE_URL}/reviews/`,body)
+        console.log(res) 
     }
     return (
         <AddReviewPageStyled>
         <Layout>
             <div className="title">
                 {/* TODO */}
-                <Typography variant='h3'>Creating a Review For: Business Name</Typography>
+                <Typography variant='h3'>Creating a Review For: {business.name}</Typography>
             </div>
             <div className="form">
                 <FormControl fullWidth className="input">
@@ -103,7 +96,16 @@ const AddReviewPage = (  ) => {
     )
 }
 
+export async function getServerSideProps({ query: {slug} }) {
+    let { data } = await axios.get(`${process.env.NEXT_PUBLIC_DB_BASE_URL}/businesses/?slug=${slug}`)
 
+    console.log(data)
+    return {
+      props: {
+        business: data[0] || null
+      }
+    }
+  }
 
 const AddReviewPageStyled = styled('AddReviewPage')({
     "root":{
