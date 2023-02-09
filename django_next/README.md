@@ -17,3 +17,4 @@ learning DRF and nextjs for a CRUD and auth app
 1/31 - 28:37 in video 7. add-review page getting error 400 on post
 2/02 - finished video 7. add-review is posting appropriately
 2/03 - finished video 8. Business page is displaying and filtering reviews
+2/08 - finished video 9. Can get jwt from httpie. Can not get into api with jwt using httpie
