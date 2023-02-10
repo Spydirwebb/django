@@ -18,3 +18,4 @@ learning DRF and nextjs for a CRUD and auth app
 2/02 - finished video 7. add-review is posting appropriately
 2/03 - finished video 8. Business page is displaying and filtering reviews
 2/08 - finished video 9. Can get jwt from httpie. Can not get into api with jwt using httpie
+2/09 - 16:45 in video 10. login page created and styled
