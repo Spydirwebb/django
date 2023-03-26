@@ -2,8 +2,20 @@ import Layout from '../../components/Layout'
 import Link from 'next/link'
 import styled from "@emotion/styled"
 import { CardContent, Card, Typography, TextField, Button } from '@mui/material'
+import { useState, useContext } from 'react'
+import AuthenticationContext from '../../context/authenticationContext'
 
 export default function LoginPage(  ) {
+    const [username, setUsername] = useState("")
+    const [password, setPassword] = useState("")
+
+    const {login}= useContext(AuthenticationContext)
+
+    const submitHandler = e => {
+        e.preventDefault()
+        login({username, password})
+    }
+
     return (
       <LoginPageStyled>
       <Layout>
@@ -12,15 +24,15 @@ export default function LoginPage(  ) {
                 <Typography variant='h3' className='title'>Login</Typography>
                 <Card>
                     <CardContent>
-                        <form>
+                        <form onSubmit={submitHandler}>
                             <div className='input'>
-                                <TextField label='Username' fullWidth />
+                                <TextField label='Username' fullWidth  onChange={e=> setUsername(e.target.value)} value={username}/>
                             </div>
                             <div className='input'>
-                                <TextField label='Password' inputProps={{'type': 'password'}} fullWidth />
+                                <TextField label='Password' inputProps={{'type': 'password'}} fullWidth onChange={e=> setPassword(e.target.value)} value={password}/>
                             </div>
                             <div className='input'>
-                                <Button variant='contained' color='primary'>Login</Button>
+                                <Button variant='contained' color='primary' type="submit">Login</Button>
                             </div>
                             <div className='linkContainer'>
                                 <Link href='account/register' className='link'>Don't have an account? Sign Up</Link>
