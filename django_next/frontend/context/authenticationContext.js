@@ -13,9 +13,21 @@ export const AuthenticationProvider = ({ children }) => {
 
     // Login User
     const login = async({username, password}) => {
-        console.log('login context')
-        console.log({username, password})
-        
+        //console.log('login context')
+        //console.log({username, password})
+        const config = {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }
+        }
+
+        const body = {
+            username,
+            password
+        }
+
+        const {data} = await axios.post(`${process.env.NEXT_PUBLIC_FRONTEND_BASE_URL}/api/login/`, body, config)
     }
     return (
         <AuthenticationContext.Provider value={{user, accessToken, error, login}}>
