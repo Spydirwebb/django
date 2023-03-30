@@ -50,3 +50,7 @@ class CategoryViewSet(viewsets.ModelViewSet):
 			return CategoryWriteSerializer
 		else:
 			return CategoryReadSerializer
+
+
+class UserAPIView(RetrieveAPIView):
+	

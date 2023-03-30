@@ -21,3 +21,4 @@ learning DRF and nextjs for a CRUD and auth app
 2/09 - 16:45 in video 10. login page created and styled
 3/25 - 32:24 in video 10. context working
 3/28 - 40:57 in video 10. error 500 on api token call
+3/30 - 45:07 in video 10. can successfully call backend for JWT's

@@ -8,11 +8,10 @@ export default function App({ Component, pageProps }) {
     if (jssStyles) {
       jssStyles.parentElement.removeChild(jssStyles)
     }
-  },[])
+  }, [])
   return (
     <AuthenticationProvider>
       <Component {...pageProps} />
     </AuthenticationProvider>
-    
   )
 }
