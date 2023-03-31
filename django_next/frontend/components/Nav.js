@@ -11,15 +11,19 @@ import {AppBar,
 
 import HomeIcon from '@mui/icons-material/Home';
 import MenuIcon from '@mui/icons-material/Menu';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 import {styled} from '@mui/system';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { useRouter } from 'next/router'
+import AuthenticationContext from '../context/authenticationContext';
 
 
 const Nav = () => {
   const [toggle, setToggle] = useState(false)
   const router = useRouter()
+
+  const {user}= useContext(AuthenticationContext)
 
   const toggleDrawer = (value) => (event) => {
   	if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
@@ -46,6 +50,18 @@ const Nav = () => {
     							    <ListItemIcon><HomeIcon /></ListItemIcon>
     							    <ListItemText primary='Home' />
     						    </ListItem>
+								{user ? (
+									<ListItem onClick={() => router.push('/logout')}>
+    							    	<ListItemIcon><AccountCircleIcon /></ListItemIcon>
+    							    	<ListItemText primary='Sign Out' />
+    						    	</ListItem>
+								): (
+									<ListItem onClick={() => router.push('/login')}>
+    							    	<ListItemIcon><AccountCircleIcon /></ListItemIcon>
+    							    	<ListItemText primary='Sign In' />
+    						    	</ListItem>
+								)}
+								
     					    </List>
     				    </div>
     				  </Drawer>

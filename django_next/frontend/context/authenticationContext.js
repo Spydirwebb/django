@@ -26,7 +26,32 @@ export const AuthenticationProvider = ({ children }) => {
 			password
 		}
 
-        const { data } = await axios.post(`${process.env.NEXT_PUBLIC_FRONTEND_BASE_URL}/api/login/`, body, config)
+		try{
+			const { data:accessResponse } = await axios.post(`${process.env.NEXT_PUBLIC_FRONTEND_BASE_URL}/api/login/`, body, config)
+			
+			if(accessResponse && accessResponse.user) {
+				setUser(accessResponse.user)
+			}
+			if(accessResponse && accessResponse.access){
+				setAccessToken(accessResponse.access)
+			}
+			router.push('/')
+		} catch(error){
+			if (error.response && error.response.data) {
+				setError(error.response.data.message)
+				return
+            } else if (error.request) {
+				setError('Something went wrong')
+				return
+            } else {
+				setError('Something went wrong')
+				return
+            }
+			console.error('Error', error.message);
+			setError('Something went wrong')
+			return
+		}
+        
 
     }
     return (
