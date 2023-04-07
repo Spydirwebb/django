@@ -91,8 +91,34 @@ export const AuthenticationProvider = ({ children }) => {
 		}
     }
 
+	const logout = async() => {
+		try {
+			// remove the http only cookie
+			await axios.post(`${process.env.NEXT_PUBLIC_FRONTEND_BASE_URL}/api/logout/`)
+
+			//remove the access token and the user from the state
+			setUser(null)
+			setAccessToken(null)
+		}catch(error){
+			if (error.response && error.response.data) {
+				setError(error.response.data.message)
+				return
+            } else if (error.request) {
+				setError('Something went wrong')
+				return
+            } else {
+				setError('Something went wrong')
+				return
+            }
+
+			console.error('Error', error.message);
+			setError('Something went wrong')
+			return
+		}
+	}
+
     return (
-        <AuthenticationContext.Provider value={{ user, accessToken, error, login, register }}>
+        <AuthenticationContext.Provider value={{ user, accessToken, error, login, logout, register }}>
             {children}
         </AuthenticationContext.Provider>
     )

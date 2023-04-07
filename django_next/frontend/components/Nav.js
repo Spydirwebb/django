@@ -17,19 +17,25 @@ import {styled} from '@mui/system';
 import { useState, useContext } from 'react';
 import { useRouter } from 'next/router'
 import AuthenticationContext from '../context/authenticationContext';
+import logout from '../pages/api/logout';
 
 
 const Nav = () => {
   const [toggle, setToggle] = useState(false)
   const router = useRouter()
 
-  const {user}= useContext(AuthenticationContext)
+  const {user, logout}= useContext(AuthenticationContext)
 
   const toggleDrawer = (value) => (event) => {
   	if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
   		return
   	}
   	setToggle(value)
+  }
+
+  const handleLogout = async(e) => {
+	e.preventDefault()
+	await logout()
   }
     return (
       <NavStyled>
@@ -51,15 +57,21 @@ const Nav = () => {
     							    <ListItemText primary='Home' />
     						    </ListItem>
 								{user ? (
-									<ListItem onClick={() => router.push('/account/logout')}>
+									<ListItem onClick={handleLogout}>
     							    	<ListItemIcon><AccountCircleIcon /></ListItemIcon>
     							    	<ListItemText primary='Sign Out' />
     						    	</ListItem>
 								): (
-									<ListItem onClick={() => router.push('/account/login')}>
-    							    	<ListItemIcon><AccountCircleIcon /></ListItemIcon>
-    							    	<ListItemText primary='Sign In' />
-    						    	</ListItem>
+									<>
+										<ListItem onClick={() => router.push('/account/login')}>
+											<ListItemIcon><AccountCircleIcon /></ListItemIcon>
+											<ListItemText primary='Sign In' />
+										</ListItem>
+										<ListItem onClick={() => router.push('/account/register')}>
+											<ListItemIcon><AccountCircleIcon /></ListItemIcon>
+											<ListItemText primary='Register' />
+										</ListItem>
+									</>
 								)}
 								
     					    </List>
