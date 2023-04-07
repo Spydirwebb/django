@@ -19,10 +19,18 @@ export default async (req, res) => {
             password
         }
         try{
+            // call backend using user credentials to get tokens
             const {data: accessResponse} = await axios.post(`${process.env.NEXT_PUBLIC_DB_BASE_URL}/api/token/`, body, config)
             accessToken = accessResponse.access
-            // in production change secure to true
-            res.setHeader('Set-Cookie', cookie.serialize('refresh', accessResponse.refresh, {httpOnly:true, secure: false, sameSite: 'strict', maxAge: 60*60*24, path:'/'}))
+            
+            res.setHeader('Set-Cookie', cookie.serialize('refresh', accessResponse.refresh, {
+                httpOnly:true,      // blocks client side script from getting the cookie 
+                secure: false,      // in production change secure to true (sent of https)
+                sameSite: 'strict', // have to be on same origin
+                maxAge: 60*60*24,   // 24 hours in seconds
+                path:'/'            // make this accessible over entire site
+            }
+            ))
         } catch(error){
             if (error.response) {
                 // The request was made and the server responded with a status code

@@ -17,7 +17,8 @@ import {styled} from '@mui/system';
 import { useState, useContext } from 'react';
 import { useRouter } from 'next/router'
 import AuthenticationContext from '../context/authenticationContext';
-import logout from '../pages/api/logout';
+import { red } from '@mui/material/colors';
+
 
 
 const Nav = () => {
@@ -51,23 +52,23 @@ const Nav = () => {
     					  onClose={toggleDrawer(!toggle)}
     				  >
     				    <div className='list'>
-    					    <List >
-    						    <ListItem onClick={() => router.push('/')} className='listItem'>
+    					    <List sx={{minWidth: 185}}>
+    						    <ListItem onClick={() => router.push('/')} sx={listItemStyled}>
     							    <ListItemIcon><HomeIcon /></ListItemIcon>
     							    <ListItemText primary='Home' />
     						    </ListItem>
 								{user ? (
-									<ListItem onClick={handleLogout}>
+									<ListItem onClick={handleLogout} sx={listItemStyled}>
     							    	<ListItemIcon><AccountCircleIcon /></ListItemIcon>
     							    	<ListItemText primary='Sign Out' />
     						    	</ListItem>
 								): (
 									<>
-										<ListItem onClick={() => router.push('/account/login')}>
+										<ListItem onClick={() => router.push('/account/login')} sx={listItemStyled}>
 											<ListItemIcon><AccountCircleIcon /></ListItemIcon>
 											<ListItemText primary='Sign In' />
 										</ListItem>
-										<ListItem onClick={() => router.push('/account/register')}>
+										<ListItem onClick={() => router.push('/account/register')} sx={listItemStyled}>
 											<ListItemIcon><AccountCircleIcon /></ListItemIcon>
 											<ListItemText primary='Register' />
 										</ListItem>
@@ -87,13 +88,13 @@ const Nav = () => {
     );
 }
 
+const listItemStyled = {
+	cursor: "pointer",
+	"&:hover": {
+		backgroundColor: "rgb(140,146,172,0.1)",
+	} 
+}
 const NavStyled = styled('Nav')({
-    ".list": {
-        color: 'red'
-    },
-    ".listItem": {
-        cursor: 'pointer'
-	}
 })
 
 export default Nav

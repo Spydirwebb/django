@@ -20,6 +20,7 @@ export default async (req, res) => {
             password
         }
         try{
+            // call backend to register user with body credentials
             await axios.post(`${process.env.NEXT_PUBLIC_DB_BASE_URL}/api/register/`, body, config)
             
 
@@ -43,6 +44,7 @@ export default async (req, res) => {
             console.error(error.config);
             return res.status(500).json({message: 'Something went wrong'})
         }
+        // success
         res.status(200).json({message: "User has been created"})
     } else{
         res.setHeader('Allow', ['POST'])

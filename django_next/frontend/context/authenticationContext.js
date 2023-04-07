@@ -27,6 +27,7 @@ export const AuthenticationProvider = ({ children }) => {
 		}
 
 		try{
+			// call nextjs api function to get user access token
 			const { data:accessResponse } = await axios.post(`${process.env.NEXT_PUBLIC_FRONTEND_BASE_URL}/api/login/`, body, config)
 			
 			if(accessResponse && accessResponse.user) {
@@ -47,9 +48,6 @@ export const AuthenticationProvider = ({ children }) => {
 				setError('Something went wrong')
 				return
             }
-			console.error('Error', error.message);
-			setError('Something went wrong')
-			return
 		}
     }
 
@@ -84,10 +82,6 @@ export const AuthenticationProvider = ({ children }) => {
 				setError('Something went wrong')
 				return
             }
-
-			console.error('Error', error.message);
-			setError('Something went wrong')
-			return
 		}
     }
 
@@ -110,10 +104,6 @@ export const AuthenticationProvider = ({ children }) => {
 				setError('Something went wrong')
 				return
             }
-
-			console.error('Error', error.message);
-			setError('Something went wrong')
-			return
 		}
 	}
 
