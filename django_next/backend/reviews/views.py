@@ -63,5 +63,5 @@ class UserAPIView(RetrieveAPIView): #read only
 		return self.request.user
 
 class RegisterUserAPIView(CreateAPIView): #write only
-	permission_classes = [permissions.AllowAny()] #any public user can use
+	permission_classes = [permissions.AllowAny] #any public user can use
 	serializer_class = RegisterUserSerializer

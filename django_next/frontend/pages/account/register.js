@@ -5,26 +5,38 @@ import { CardContent, Card, Typography, TextField, Button } from '@mui/material'
 import { useState, useContext } from 'react'
 import AuthenticationContext from '../../context/authenticationContext'
 
-export default function LoginPage(  ) {
+export default function RegisterPage(  ) {
+    const [email, setEmail] = useState("")
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
+    const [password2, setPassword2] = useState("")
 
     const {login}= useContext(AuthenticationContext)
 
     const submitHandler = e => {
         e.preventDefault()
-        login({username, password})
+        //login({username, password})
+        if (password !=password2){
+            console.error("Password do not match")
+        }
+        console.log(email)
+        console.log(username)
+        console.log(password)
+        console.log(password2)
     }
 
     return (
-      <LoginPageStyled>
+      <RegisterPageStyled>
       <Layout>
         <div>
             <div className='form'>
-                <Typography variant='h3' className='title'>Login</Typography>
+                <Typography variant='h3' className='title'>Register</Typography>
                 <Card>
                     <CardContent>
                         <form onSubmit={submitHandler}>
+                            <div className='input'>
+                                <TextField label='Email' fullWidth  onChange={e=> setEmail(e.target.value)} value={email}/>
+                            </div>
                             <div className='input'>
                                 <TextField label='Username' fullWidth  onChange={e=> setUsername(e.target.value)} value={username}/>
                             </div>
@@ -32,10 +44,13 @@ export default function LoginPage(  ) {
                                 <TextField label='Password' inputProps={{'type': 'password'}} fullWidth onChange={e=> setPassword(e.target.value)} value={password}/>
                             </div>
                             <div className='input'>
-                                <Button variant='contained' color='primary' type="submit">Login</Button>
+                                <TextField label='Confirm Password' inputProps={{'type': 'password'}} fullWidth onChange={e=> setPassword2(e.target.value)} value={password2}/>
+                            </div>
+                            <div className='input'>
+                                <Button variant='contained' color='primary' type="submit">Register</Button>
                             </div>
                             <div className='linkContainer'>
-                                <Link href='/account/register' className='link'>Don't have an account? Sign Up</Link>
+                                <Link href='/account/login' className='link'>Already have an account? Sign In</Link>
                             </div>
                         </form>
                     </CardContent>
@@ -43,7 +58,7 @@ export default function LoginPage(  ) {
             </div>
         </div>
       </Layout>
-      </LoginPageStyled>
+      </RegisterPageStyled>
     )
   }
   
@@ -58,7 +73,7 @@ export default function LoginPage(  ) {
     }
   }
 */
-const LoginPageStyled = styled("LoginPage")({
+const RegisterPageStyled = styled("RegisterPage")({
     '.form': {
         marginTop: '35px',
         width: '50%',
