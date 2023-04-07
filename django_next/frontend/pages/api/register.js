@@ -5,7 +5,7 @@ export default async (req, res) => {
     let accessToken = null
 
     if (req.method === 'POST'){
-        const {username, password} = req.body
+        const {username, email, password} = req.body
 
         const config = {
             headers: {
@@ -16,11 +16,12 @@ export default async (req, res) => {
 
         const body = {
             username, 
+            email,
             password
         }
         try{
-            const {data: accessResponse} = await axios.post(`${process.env.NEXT_PUBLIC_DB_BASE_URL}/api/token/`, body, config)
-            accessToken = accessResponse.access
+            await axios.post(`${process.env.NEXT_PUBLIC_DB_BASE_URL}/api/register/`, body, config)
+            
 
         } catch(error){
             if (error.response) {
@@ -42,7 +43,7 @@ export default async (req, res) => {
             console.error(error.config);
             return res.status(500).json({message: 'Something went wrong'})
         }
-        res.status(200).json({user:userData, access: accessToken})
+        res.status(200).json({message: "User has been created"})
     } else{
         res.setHeader('Allow', ['POST'])
         res.status(405).json({message: `Method ${req.method} is not allowed`})

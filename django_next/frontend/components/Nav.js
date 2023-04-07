@@ -46,17 +46,17 @@ const Nav = () => {
     				  >
     				    <div className='list'>
     					    <List >
-    						    <ListItem onClick={() => router.push('/')}>
+    						    <ListItem onClick={() => router.push('/')} className='listItem'>
     							    <ListItemIcon><HomeIcon /></ListItemIcon>
     							    <ListItemText primary='Home' />
     						    </ListItem>
 								{user ? (
-									<ListItem onClick={() => router.push('/logout')}>
+									<ListItem onClick={() => router.push('/account/logout')}>
     							    	<ListItemIcon><AccountCircleIcon /></ListItemIcon>
     							    	<ListItemText primary='Sign Out' />
     						    	</ListItem>
 								): (
-									<ListItem onClick={() => router.push('/login')}>
+									<ListItem onClick={() => router.push('/account/login')}>
     							    	<ListItemIcon><AccountCircleIcon /></ListItemIcon>
     							    	<ListItemText primary='Sign In' />
     						    	</ListItem>
@@ -75,9 +75,12 @@ const Nav = () => {
     );
 }
 
-const NavStyled = styled('nav')({
-  '.list': {
-		minWidth: '400'
+const NavStyled = styled('Nav')({
+    ".list": {
+        color: 'red'
+    },
+    ".listItem": {
+        cursor: 'pointer'
 	}
 })
 

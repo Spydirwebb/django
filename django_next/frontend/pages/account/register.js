@@ -11,7 +11,7 @@ export default function RegisterPage(  ) {
     const [password, setPassword] = useState("")
     const [password2, setPassword2] = useState("")
 
-    const {login}= useContext(AuthenticationContext)
+    const {register}= useContext(AuthenticationContext)
 
     const submitHandler = e => {
         e.preventDefault()
@@ -19,6 +19,7 @@ export default function RegisterPage(  ) {
         if (password !=password2){
             console.error("Password do not match")
         }
+        register({username, email, password})
         console.log(email)
         console.log(username)
         console.log(password)
