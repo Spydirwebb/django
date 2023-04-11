@@ -26,3 +26,4 @@ learning DRF and nextjs for a CRUD and auth app
 4/04 - 08:07 in video 11. created register views and serializers 
 4/06 - 24:29 in video 11. creating register api logic
 4/07 - finished video 12. user can log in and out from frontend
+4/11 - finished video 13. user stays logged in after refesh

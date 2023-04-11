@@ -1,4 +1,4 @@
-import { createContext, useState } from 'react'
+import { createContext, useState, useEffect } from 'react'
 import axios from 'axios'
 import { useRouter } from 'next/router'
 
@@ -10,6 +10,10 @@ export const AuthenticationProvider = ({ children }) => {
 	const [error, setError] = useState(null)
 
 	const router = useRouter()
+
+	useEffect(() => {
+		checkIfUserLoggedIn()
+	}, [])
 
 	// Login User
 	const login = async({username, password}) => {
@@ -51,6 +55,7 @@ export const AuthenticationProvider = ({ children }) => {
 		}
     }
 
+	// register a new user
 	const register = async({username, email, password}) => {
 
         const config = {
@@ -85,6 +90,7 @@ export const AuthenticationProvider = ({ children }) => {
 		}
     }
 
+	// log out a logged in user
 	const logout = async() => {
 		try {
 			// remove the http only cookie
@@ -104,6 +110,32 @@ export const AuthenticationProvider = ({ children }) => {
 				setError('Something went wrong')
 				return
             }
+		}
+	}
+
+	// check if a user is logged in on render/refresh
+	const checkIfUserLoggedIn = async () => {
+		try {
+			// api request to api/user in nextjs
+			const { data } = await axios.post(`${process.env.NEXT_PUBLIC_FRONTEND_BASE_URL}/api/user`)
+
+			// set user and access token in state
+			setUser(data.user)
+			setAccessToken(data.access)
+		} catch(error) {
+			if (error.response & error.response.data) {
+		  		setError(error.response.data.message)
+		  		return      
+		    } else if (error.request) {
+			    setError('Something went wrong')
+			    return  
+		    } else {
+				setError('Something went wrong')
+				return
+		    }
+		    console.error('Error', error.message);
+		    setError('Something went wrong')
+		    return
 		}
 	}
 
